@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     #TemplateView.as_view(template_name= 'settings_detail.html')
     url(r'^$', views.index),
     url(r'^testemail/$', views.testEmail),
