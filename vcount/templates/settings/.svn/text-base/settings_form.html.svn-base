@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block title %}
+   {{dictum.title}}
+{% endblock %}
+
+{% block menu %}
+<div>
+  <ul id="slidetabsmenu">
+    <li class="current"><a href="" title="{{dictum.settingsTab}}"><span>{{dictum.settingsTab}}</span></a></li>
+    <li><a href="/channels/" title="{{dictum.channelsTab}}"><span>{{dictum.channelsTab}}</span></a></li>
+    <li><a href="/administration/" title="{{dictum.administrationTab}}"><span>{{dictum.administrationTab}}</span></a></li>
+    <li><a href="/update/" title="{{dictum.updateTab}}"><span>{{dictum.updateTab}}</span></a></li>
+    <li><a href="/password/" title="{{dictum.passwordTab}}"><span>{{dictum.passwordTab}}</span></a></li>
+    <li><a href="/exit/" title="{{dictum.exitTab}}"><span>{{dictum.exitTab}}</span></a></li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<link href="/content/css/settings.css" rel="stylesheet" type="text/css" media="all" />
+<form action="" method="post" id='settings'>{% csrf_token %}
+  <div id="shoppanel">
+    <label id="shoppanellabel">{{dictum.shoppanellabel}}</label>
+    <label id="shopidlabel">{{dictum.shopidlabel}}</label>
+    <div class="field">
+		{{ form.shopid }}
+	</div>
+	
+	<label id="schedulelabel">{{dictum.schedulelabel}}</label>
+	{{ form.workallday }}
+	<label id="alldaylabel">{{dictum.alldaylabel}}</label>
+	
+	<label id="countfromlabel">{{dictum.countfromlabel}}</label>
+	{{ form.worktimefrom}}
+	
+	<label id="counttilllabel">{{dictum.counttilllabel}}</label>
+	{{ form.worktimetill}}
+	
+  </div>
+  
+  <div id="reportsettings">
+  	<label id="reportsendinglabel">{{dictum.reportsendinglabel}}</label>
+  	<label id="reportRangeLabel">{{dictum.reportRangeLabel}}</label>
+  	{{form.intervalhours}}
+  
+  	<label id="manualHoursLabel">{{dictum.manualHoursLabel}}</label>
+  	{{form.ismanualhours}}
+  
+  	{{form.manualhours}}
+  
+  	<label id="is1Clabel">{{dictum.is1Clabel}}</label>
+  	{{form.is1C}}
+  </div>
+  
+  <div id="reportdelivery">
+    <label id="deliveryTypesLabel">{{dictum.deliveryTypesLabel}}</label>
+    
+    <label id="sendByEmailLabel">{{dictum.sendByEmailLabel}}</label>
+    {{form.sendbyemail}}
+    
+    <label id="toEmailLabel">{{dictum.toEmailLabel}}</label>
+    {{form.emailto}}
+    
+    <label id="sendToServerLabel">{{dictum.sendToServerLabel}}</label>
+    {{form.sendtoserver}}
+    
+    <label id="serverAddressLabel">{{dictum.serverAddressLabel}}</label>
+    {{form.serveraddress}}
+    
+    <label id="serverPortLabel">{{dictum.serverPortLabel}}</label>
+	{{form.serverport}}   
+	
+	<div id="shareSettings">
+	  <label id="sharedFolderLabel">{{dictum.sharedFolderLabel}}</label>
+	  {{form.useshared}}
+	  
+	  <label id="sharePathLabel">{{dictum.sharePathLabel}}</label>
+	  {{form.sharepath}}
+	  
+	  <label id="shareUserLabel">{{dictum.shareUserLabel}}</label>
+	  {{form.shareuser}}
+	  
+	  <label id="sharePasswordLabel">{{dictum.sharePasswordLabel}}</label>
+	  {{form.sharepassword}}
+	</div> 
+  </div>
+  
+  <div id="emailSettings">
+    <label id="outgoingEmailLabel">{{dictum.outgoingEmailLabel}}</label>
+    <label id="emailFromLabel">{{dictum.emailFromLabel}}</label>
+    {{form.emailfrom}}
+    
+    <label id="smtpServerLabel">{{dictum.smtpServerLabel}}</label>
+    {{form.smtpserver}}
+    
+    <label id="smtpPortLabel">{{dictum.smtpPortLabel}}</label>
+    {{form.smtpport}}
+    
+    <label id="attemptsToSendLabel">{{dictum.attemptsToSendLabel}}</label>
+    {{form.attemptstosend}}
+    
+    <div id="smtpAuth">
+      <label id="authenticationLabel">{{dictum.authenticationLabel}}</label>
+      <label id="isAuthenticateLabel">{{dictum.isAuthenticateLabel}}</label>
+      {{form.useauthentication}}
+      
+      <label id="emailUserNameLabel">{{dictum.emailUserNameLabel}}</label>
+      {{form.smtpuser}}
+      
+      <label id="emailPasswordLabel">{{dictum.emailPasswordLabel}}</label>
+      {{form.smtppassword}}
+      
+      <label id="useSslLabel">{{dictum.useSslLabel}}</label>
+      {{form.usessl}}
+    
+    </div>
+    
+  
+  </div>
+  
+  <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton">
+</form>
+
+<script type="text/javascript">
+    var frm = $('#settings');
+    frm.submit(function () {
+        var dataToSend = 'fake=fake';//frm.serialize();
+        $('input[type=text]').each( function() {
+        	dataToSend = dataToSend + '&' + $(this).attr('name') + '=' + escape($(this).val());
+        });
+        $('input[type=password]').each( function() {
+        	dataToSend = dataToSend + '&' + $(this).attr('name') + '=' + $(this).val();
+        });
+        $('input[type=checkbox]').each( function() {
+            if (this.checked)
+            {
+        		dataToSend = dataToSend + '&' + $(this).attr('name') + '=' + $(this).val();
+            }
+        });
+        $('input[type=hidden]').each( function() {
+        	dataToSend = dataToSend + '&' + $(this).attr('name') + '=' + $(this).val();
+        });
+
+        
+        $.ajax({
+            type: "POST",
+            url: "/",
+            data: dataToSend,
+            success: function(data){
+        		new Alert(data).show();
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+</script>
+
+<script type="text/javascript">
+
+    function showHideElements(elements, type) 
+    {
+        var maimelement = document.getElementById(elements[0]);
+        for(var i = 1; i < elements.length; i++)
+        {
+    		var element = document.getElementById(elements[i]);
+    		if (type)
+    		{
+    		    element.disabled = ! maimelement.checked;
+    		}
+    		else
+    		{
+    			element.disabled = maimelement.checked;
+    		}
+        }
+    }
+
+    $(document).ready(function () 
+    {
+        // Show/Hide by click implementation
+    	var workallday = document.getElementById("id_workallday");
+    	workallday.onchange = function (){showHideElements(["id_workallday", "id_worktimefrom", "id_worktimetill"], false);};
+    	workallday.onchange();
+
+    	var ismanualhours = document.getElementById("id_ismanualhours");
+    	ismanualhours.onchange = function () {
+        	showHideElements(["id_ismanualhours", "id_intervalhours"], false);
+        	showHideElements(["id_ismanualhours", "id_manualhours"], true);
+        };
+        ismanualhours.onchange();
+
+        var useauthentication = document.getElementById("id_useauthentication");
+        useauthentication.onchange = function () {
+        	showHideElements(["id_useauthentication", "id_smtppassword", "id_smtpuser", "id_usessl"], true);
+        };
+        useauthentication.onchange();
+
+        var sendbyemail = document.getElementById("id_sendbyemail");
+        sendbyemail.onchange = function () {
+        	showHideElements(["id_sendbyemail", "id_emailto", "id_emailfrom", "id_smtpserver", "id_smtpport", "id_attemptstosend",
+        	                  "id_useauthentication", "id_smtppassword", "id_smtpuser", "id_usessl"], true);
+
+            if (this.checked)
+            {
+        		var useauthentication = document.getElementById("id_useauthentication");
+        		useauthentication.onchange();
+            }
+        };
+        sendbyemail.onchange();
+
+        var sendtoserver = document.getElementById("id_sendtoserver");
+        sendtoserver.onchange = function () {
+        	showHideElements(["id_sendtoserver", "id_serveraddress", "id_serverport"], true);
+        };
+        sendtoserver.onchange();
+
+        var useshared = document.getElementById("id_useshared");
+        useshared.onchange = function () {
+        	showHideElements(["id_useshared", "id_sharepath", "id_shareuser", "id_sharepassword"], true);
+        };
+        useshared.onchange();
+    });
+
+</script>
+
+{% endblock %}

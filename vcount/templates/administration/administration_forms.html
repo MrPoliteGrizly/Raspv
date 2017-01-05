@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block title %}
+   {{dictum.title}}
+{% endblock %}
+
+{% block menu %}
+<div>
+  <ul id="slidetabsmenu">
+    <li><a href="/" title="{{dictum.settingsTab}}"><span>{{dictum.settingsTab}}</span></a></li>
+    <li><a href="/channels/" title="{{dictum.channelsTab}}"><span>{{dictum.channelsTab}}</span></a></li>
+    <li class="current"><a href="/administration/" title="{{dictum.administrationTab}}"><span>{{dictum.administrationTab}}</span></a></li>
+    <li><a href="/update/" title="{{dictum.updateTab}}"><span>{{dictum.updateTab}}</span></a></li>
+    <li><a href="/password/" title="{{dictum.passwordTab}}"><span>{{dictum.passwordTab}}</span></a></li>
+    <li><a href="/exit/" title="{{dictum.exitTab}}"><span>{{dictum.exitTab}}</span></a></li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<link href="/content/css/administration.css" rel="stylesheet" type="text/css" media="all" />
+<form action="" method="post" id='hostnameform'>{% csrf_token %}
+
+  <div id="hostNamePanel">
+    <label id="hostNameLabel">{{dictum.hostNameLabel}}</label>
+    {{hostnameform.hostname}}
+    <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="hostnamebutton">
+  </div>
+
+</form>
+
+<form action="" method="post" id='datetimeform'>{% csrf_token %}
+
+  <div id="datetimePanel">
+    <label id="datetimeLabel">{{dictum.datetimeLabel}}</label>
+    {{datetimefrom.datetimefield}}
+    <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="datetimebutton">
+  </div>
+
+</form>
+
+<form action="" method="post" id='logsform'>{% csrf_token %}
+
+  <div id="logsPanel">
+    <label id="logsLabel">{{dictum.logsLabel}}</label>
+    {{logsform.emailto}}
+    <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="logsbutton">
+  </div>
+
+</form>
+
+<form action="" method="post" id='resenddataform'>{% csrf_token %}
+
+  <div id="resenddataPanel">
+    <label id="resenddataLabel">{{dictum.resenddataLabel}}</label>
+        
+    <label id="allRadioLabel">{{dictum.allRadioLabel}}</label> 
+    <label id="chooseDateRadioLabel">{{dictum.chooseDateRadioLabel}}</label> 
+
+    <input type="radio" name="resendtype" value="1" id="id_resendtype_0" checked="checked">
+    <input type="radio" name="resendtype" value="2" id="id_resendtype_1"/>
+    
+    {{resenddataform.resenddate}}
+    
+    <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="resenddatabutton">
+  </div>
+
+</form>
+
+<form action="" method="post" id='notificationsform'>{% csrf_token %}
+
+  <div id="notificationsPanel">
+    <label id="notificationsLabel">{{dictum.notificationsLabel}}</label>
+    
+    <label id="notifyLabel">{{dictum.notifyLabel}}</label>
+    {{notificationsform.notify}}
+    
+    <label id="notifyEmailLabel">{{dictum.notifyEmailLabel}}</label>
+    {{notificationsform.notificationemail}}
+    
+    <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="notificationsbutton">
+  </div>
+
+</form>
+
+<form action="" method="post" id='networkform'>{% csrf_token %}
+
+  <div id="networkPanel">
+    <label id="networkLabel">{{dictum.networkLabel}}</label>
+    
+    <div id="networkTypeAbsolutePanel">
+      <label id="networkTypeLabel">{{dictum.networkTypeLabel}}</label>
+     
+     <label id="ethernetTypeLabel">Ethernet</label>
+     <label id="wifiTypeLabel">Wi-Fi</label>
+     
+	  {% for choice in networkform.networktype.field.choices %}
+         <input name='{{ networkform.networktype.name }}' 
+           id='{{ networkform.networktype.auto_id }}_{{ forloop.counter0 }}' type='radio' value='{{ choice.0 }}'
+           {% ifequal networkform.initial.networktype choice.0 %} checked='checked' {% endifequal %}/>
+      {% endfor %}
+      
+      <label id="wifiessidLabel">{{dictum.wifiessidLabel}}</label>
+      {{networkform.wifiessid}}
+      
+      <label id="wifiPasswordLabel">{{dictum.wifiPasswordLabel}}</label>
+      {{networkform.wifipassword}}
+    </div>
+    
+    <div id="ipConfigPanel">
+      <label id="ipCounfigurationLabel">{{dictum.ipCounfigurationLabel}}</label>
+      
+      <label id="ipDynamicLabel">{{dictum.ipDynamicLabel}}</label>
+      <label id="ipStaticLabel">{{dictum.ipStaticLabel}}</label>
+      {% for choice in networkform.iptype.field.choices %}
+         <input name='{{ networkform.iptype.name }}' 
+           id='{{ networkform.iptype.auto_id }}_{{ forloop.counter0 }}' type='radio' value='{{ choice.0 }}'
+           {% ifequal networkform.initial.iptype choice.0 %} checked='checked' {% endifequal %}/>
+      {% endfor %}
+      
+      <label id="ipAddressLabel">{{dictum.ipAddressLabel}}</label>
+      {{networkform.ipaddress}}
+      
+      <label id="ipMaskLabel">{{dictum.ipMaskLabel}}</label>
+      {{networkform.ipmask}}
+      
+      <label id="gatewayLabel">{{dictum.gatewayLabel}}</label>
+      {{networkform.gateway}}
+      
+      <label id="dnsServerLabel">{{dictum.dnsServerLabel}}</label>
+      {{networkform.dnsserver}}      
+    </div>
+    
+    <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="networkbutton">
+  </div>
+
+</form>
+
+
+<script type="text/javascript">
+    var hostfrm = $('#hostnameform');
+    hostfrm.submit(function () {
+        var dataToSend = hostfrm.serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: "/administration/changehostname/",
+            data: dataToSend,
+            success: function (data) {
+                new Alert(data).show();
+                //window.alert(data);
+                //confirm("If you want to close the window, press 'OK'?");
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+
+    datetimefrm = $('#datetimeform');
+    datetimefrm.submit(function () {
+        var dataToSend = datetimefrm.serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: "/administration/changedatetime/",
+            data: dataToSend,
+            success: function (data) {
+        		new Alert(data).show();
+                //confirm("If you want to close the window, press 'OK'?");
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+
+    logsfrm = $('#logsform');
+    logsfrm.submit(function () {
+        var dataToSend = logsfrm.serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: "/administration/sendlogs/",
+            data: dataToSend,
+            success: function (data) {
+        		new Alert(data).show();
+                //confirm("If you want to close the window, press 'OK'?");
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+
+    resendfrm = $('#resenddataform');
+    resendfrm.submit(function () {
+        var dataToSend = resendfrm.serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: "/administration/resendata/",
+            data: dataToSend,
+            success: function (data) {
+        		new Alert(data).show();
+                //confirm("If you want to close the window, press 'OK'?");
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+
+    notificationsform = $('#notificationsform');
+    notificationsform.submit(function () {
+        var dataToSend = notificationsform.serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: "/administration/setnotifications/",
+            data: dataToSend,
+            success: function (data) {
+        		new Alert(data).show();
+                //confirm("If you want to close the window, press 'OK'?");
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+
+    networkfrm = $('#networkform');
+    networkfrm.submit(function () {
+        var dataToSend = networkfrm.serialize();
+        $('input[disabled]').each( function() {
+        	dataToSend = dataToSend + '&' + $(this).attr('name') + '=' + $(this).val();
+        });
+        
+        $.ajax({
+            type: "POST",
+            url: "/administration/setnetwork/",
+            data: dataToSend,
+            success: function (data) {
+        		new Alert(data).show();
+                //confirm("If you want to close the window, press 'OK'?");
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+</script>
+
+
+<script type="text/javascript">
+	function showHideElements(elements, type) 
+	{
+    	var maimelement = document.getElementById(elements[0]);
+    	for(var i = 1; i < elements.length; i++)
+    	{
+			var element = document.getElementById(elements[i]);
+			if (type)
+			{
+		    	element.disabled = ! maimelement.checked;
+			}
+			else
+			{
+				element.disabled = maimelement.checked;
+			}
+    	}
+	}
+
+	function showHideElementsByRadio(elements, type) 
+	{
+    	var maimelement = document.getElementById(elements[0]);
+
+    	if (maimelement.checked)
+    	{
+    		for(var i = 1; i < elements.length; i++)
+    		{
+				var element = document.getElementById(elements[i]);
+				element.disabled = ! type;
+    		}
+    	}
+	}
+
+	$(document).ready(function () 
+	{
+		// Show/Hide by click implementation
+		var resendtype0 = document.getElementById("id_resendtype_0");
+		resendtype0.onclick= function (){showHideElementsByRadio(["id_resendtype_0", "id_resenddate"], false);};
+		resendtype0.onclick();
+
+		var resendtype1 = document.getElementById("id_resendtype_1");
+		resendtype1.onclick= function (){showHideElementsByRadio(["id_resendtype_1", "id_resenddate"], true);};
+
+		var notify = document.getElementById("id_notify");
+		notify.onclick = function (){showHideElements(["id_notify", "id_notificationemail"], true);};
+		notify.onclick();
+
+		//Network type
+		var networktype0 = document.getElementById("id_networktype_0");
+		networktype0.onclick= function (){showHideElementsByRadio(["id_networktype_0", "id_wifiessid", "id_wifipassword"], false);};
+		networktype0.onclick();
+
+		var networktype1 = document.getElementById("id_networktype_1");
+		networktype1.onclick= function (){showHideElementsByRadio(["id_networktype_1", "id_wifiessid", "id_wifipassword"], true);};
+		networktype1.onclick();
+
+		//IP type
+		var iptype0 = document.getElementById("id_iptype_0");
+		iptype0.onclick= function (){showHideElementsByRadio(["id_iptype_0", "id_ipaddress", "id_ipmask", "id_gateway", "id_dnsserver"], false);};
+		iptype0.onclick();
+
+		var iptype1 = document.getElementById("id_iptype_1");
+		iptype1.onclick= function (){showHideElementsByRadio(["id_iptype_1", "id_ipaddress", "id_ipmask", "id_gateway", "id_dnsserver"], true);};
+		iptype1.onclick();
+	});
+</script>
+
+{% endblock %}

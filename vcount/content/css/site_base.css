@@ -1,0 +1,145 @@
+@CHARSET "UTF-8";
+
+body
+{
+	border-collapse: separate;
+	display: block;
+	font-family: 'Arial Unicode MS', Arial, sans-serif;
+	font-size: 13px;
+	color: rgb(0, 0, 0);
+	position: absolute;
+	width: 98%;
+	height: 720px;
+}
+
+input
+{
+	letter-spacing: normal;
+	line-height: normal;
+	padding-bottom: 5px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 5px;
+	text-align: start;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+#slidetabsmenu {
+float:left;
+width:98%;
+font-size:90%;
+line-height:normal;
+border-bottom: 1px solid gray;
+top: 0px;
+outline: 0px;
+}
+
+* html #slidetabsmenu{
+margin-bottom: 1em;
+}
+
+#slidetabsmenu ul{
+list-style-type: none;
+margin:0;
+margin-left: 0px;
+padding:0;
+}
+
+#slidetabsmenu li{
+display:inline;
+margin:0;
+padding:0;
+}
+
+#slidetabsmenu a {
+float:left;
+background:url(/content/images/tab-left.gif) no-repeat left top;
+margin:0;
+padding:0 0 0 9px;
+text-decoration:none;
+}
+
+#slidetabsmenu a span {
+float:left;
+display:block;
+background:url(/content/images/tab-right.gif) no-repeat right top;
+padding:3px 14px 3px 5px;
+font-weight:bold;
+color:#3B3B3B;
+}
+
+
+#slidetabsmenu a span {float:none;}
+
+
+#slidetabsmenu a:hover span {
+color: black;
+}
+
+#slidetabsmenu li.current a {
+background-position:0 -125px;
+}
+
+#slidetabsmenu li.current a span {
+background-position:100% -125px;
+color: black;
+}
+
+#slidetabsmenu a:hover {
+background-position:0% -125px;
+}
+
+#slidetabsmenu a:hover span {
+background-position:100% -125px;
+}
+
+
+
+/* DIV */
+
+div#content
+{
+	width: 90%;
+	align: center;
+}
+
+
+.sendbutton
+{
+	color: rgb(0, 0, 0);
+	cursor: pointer;
+	direction: ltr;
+	display: block;
+	font-family: 'Arial Unicode MS', Arial, sans-serif;
+	font-size: 13px;
+	height: 30px;
+	left: 10px;
+	letter-spacing: normal;
+	line-height: normal;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	padding-bottom: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 5px;
+	position: absolute;
+	text-align: center;
+	text-decoration: none;
+	text-indent: 0px;
+	text-shadow: none;
+	text-transform: none;
+	top: 725px;
+	width: 82px;
+	word-spacing: 0px;
+	writing-mode: lr-tb;
+}
+
+
+#language
+{
+	float: right;
+}

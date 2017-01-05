@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/vCountArm/!svn/ver/22/src/vCountDjGui/vCountDjGui/update
+END
+views.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/vCountArm/!svn/ver/22/src/vCountDjGui/vCountDjGui/update/views.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/update/__init__.py
+END
+tests.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/update/tests.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/update/models.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/update/urls.py
+END
+forms.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/vCountArm/!svn/ver/22/src/vCountDjGui/vCountDjGui/update/forms.py
+END

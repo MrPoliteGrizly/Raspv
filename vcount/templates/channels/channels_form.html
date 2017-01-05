@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+
+{% block title %}
+   {{dictum.title}}
+{% endblock %}
+
+{% block menu %}
+<div>
+  <ul id="slidetabsmenu">
+    <li><a href="/" title="{{dictum.settingsTab}}"><span>{{dictum.settingsTab}}</span></a></li>
+    <li class="current"><a href="/channels/" title="{{dictum.channelsTab}}"><span>{{dictum.channelsTab}}</span></a></li>
+    <li><a href="/administration/" title="{{dictum.administrationTab}}"><span>{{dictum.administrationTab}}</span></a></li>
+    <li><a href="/update/" title="{{dictum.updateTab}}"><span>{{dictum.updateTab}}</span></a></li>
+    <li><a href="/password/" title="{{dictum.passwordTab}}"><span>{{dictum.passwordTab}}</span></a></li>
+    <li><a href="/exit/" title="{{dictum.exitTab}}"><span>{{dictum.exitTab}}</span></a></li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<link href="/content/css/channels.css" rel="stylesheet" type="text/css" media="all" />
+
+<form action="" method="post" id='channels'>{% csrf_token %}
+
+  {{form.ignoredcells}}
+  {{form.y_offset1}}
+  {{form.y_offset2}}
+  {{form.minflow}}
+  {{form.maxflow}}
+  
+  <div id="channelpannel">
+    <label id="channelLabel">{{dictum.channelLabel}}</label> 
+    <select id="channelsselect">
+      <option>{{dictum.channelOption}}</option>
+    </select>
+    
+    <label id="isSwitchedLabel">{{dictum.isSwitchedLabel}}</label> 
+    {{form.isswitched}}
+    
+    <label id="saveVideoLabel">{{dictum.saveVideoLabel}}</label> 
+    {{form.savevideo}}
+    
+    <label id="autocalibrationLabel">{{dictum.autocalibrationLabel}}</label> 
+    {{form.useautocalibration}}
+    
+    <div id="imageContainer">
+       <img id='channelImage' width='640' height='480' src='/mjpg/video.cgi?1'>
+       <div id="canvas"></div>
+    </div>
+    
+    <div id="count_arrow1" class="count_arrow1_up"></div>
+    <div id="count_arrow2" class="count_arrow2_up"></div>
+    
+    <button type="button" id="upButton"></button>
+    <button type="button" id="downButton" onclick="downButtonClick()"></button>
+  
+  </div>
+  
+  <input type="submit" value="{{dictum.sendbutton}}" class="sendbutton" id="applybutton">
+
+</form>
+
+<script type="text/javascript">
+	function changeCountArrow()
+	{
+		var countDirection = document.getElementById("id_isswitched");
+		if (countDirection.checked)
+		{
+			document.getElementById("count_arrow1").setAttribute("class", "count_arrow1_down");
+			document.getElementById("count_arrow2").setAttribute("class", "count_arrow2_down");
+		}
+		else
+		{
+			document.getElementById("count_arrow1").setAttribute("class", "count_arrow1_up");
+			document.getElementById("count_arrow2").setAttribute("class", "count_arrow2_up");
+		}
+		
+	}
+</script>
+
+<script type="text/javascript">
+    var frm = $('#channels');
+    frm.submit(function () {
+        var dataToSend = frm.serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: "/channels/",
+            data: dataToSend,
+            success: function (data) {
+        	    changeCountArrow();
+                new Alert(data).show();
+            },
+            error: function(data) {
+            	alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+</script>
+
+<script src="/content/javascript/jquery/jsdraw2d.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+  var cellNumberX = 24; var cellNumberY = 8;
+
+  var imageWidth = 640; var imageHeight = 480;
+
+  var Y_offset1 = 0.55; // percentage of picture
+  var Y_offset2 = 0.95; // percentage of picture
+  var X_offset1 = 0.05;
+  var X_offset2 = 0.95;
+
+  var cellWidth = imageWidth * (X_offset2 - X_offset1) / cellNumberX; // square width
+  var cellHeight = imageHeight * (Y_offset2 - Y_offset1) / cellNumberY; // square height
+
+  var canvasDiv = document.getElementById("canvas");
+  //var cameraImage = document.getElementById("channelImage");
+  var ignorableCellsElem = document.getElementById("id_ignoredcells");
+  var ignorableCells = ignorableCellsElem.value;
+  var offsetY = imageHeight * Y_offset1;
+  var offsetX = imageWidth * X_offset1;
+
+  var gr = new jsGraphics(canvasDiv);
+  var penWidth;
+  var col;
+  var pen;
+  var d1, d2;
+  var canvasXY = getCoordinates();
+  var canvasOffset = getCanvasOffset();
+
+  setPenColor();
+
+  var points = new Array();
+  var cells = new Array();
+
+  if (ignorableCells == null || ignorableCells.length == 0) {
+    ignorableCells = "";
+    for (var i = 0; i < 1000; i++) {
+        ignorableCells = ignorableCells + "0";
+    }
+  }
+
+  function calculateOffsets()
+  {
+    var yOffsetEl1 = document.getElementById("id_y_offset1");
+	Y_offset1 = parseFloat(yOffsetEl1.value);
+	  
+	var yOffsetEl2 = document.getElementById("id_y_offset2");
+    Y_offset2 = parseFloat(yOffsetEl2.value);
+
+    cellHeight = imageHeight * (Y_offset2 - Y_offset1) / cellNumberY; // square height
+    offsetY = imageHeight * Y_offset1;
+  }
+
+  convertStringToCells();
+
+  var ie = false;
+
+  if (document.all)
+    ie = true;
+  if (!ie) {
+    //canvasDiv.captureEvents(Event.MOUSEMOVE)
+    //canvasDiv.captureEvents(Event.CLICK)
+  }
+
+  canvasDiv.onmousemove = getMouseXY;
+  canvasDiv.onclick = fillCell;
+
+  var mouseX = 0;
+  var mouseY = 0;
+
+
+
+  //Get mouse position
+  function getMouseXY(e) {
+
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+
+    if (mouseX < 0) { mouseX = 0; }
+    if (mouseY < 0) { mouseY = 0; }
+
+	  //some bug workroud
+    mouseX = mouseX - canvasOffset.x - 10;
+    mouseY = mouseY - canvasOffset.y - 10;
+
+    return true;
+  }
+
+  function setPenColor() {
+    col = new jsColor("blue");
+    pen = new jsPen(col, 1);
+
+    return true;
+  }
+
+  function getCanvasOffset() {
+    var x = 0;
+    var y = 0;
+
+    var elem = canvasDiv;
+    while (elem != null) {    
+		  y += elem.offsetTop;
+        x += elem.offsetLeft;
+        elem = elem.offsetParent;
+    }
+
+    return new jsPoint(x, y);
+  }
+
+  function getCoordinates() {
+    var x = 0;
+    var y = 0;
+
+    /*var elem = canvasDiv;
+    while (elem != null) {
+        
+		  y += elem.offsetTop;
+        x += elem.offsetLeft;
+        elem = elem.offsetParent;
+    }*/
+
+    return new jsPoint(x, y);
+  }
+
+  function drawGrid() {
+    var startY = offsetY;
+
+    for (var i = 0; i <= cellNumberY; i++) {
+        gr.drawLine(pen, new jsPoint(canvasXY.x + offsetX, canvasXY.y + startY), new jsPoint(canvasXY.x + imageWidth * X_offset2, canvasXY.y + startY));
+        startY = Math.round(startY + cellHeight);
+    }
+
+    var startX = offsetX;
+    for (var i = 0; i <= cellNumberX; i++) {
+        gr.drawLine(pen, new jsPoint(canvasXY.x + startX, canvasXY.y + offsetY), new jsPoint(canvasXY.x + startX, canvasXY.y + imageHeight * Y_offset2));
+        startX = offsetX + Math.round((i + 1) * cellWidth);
+    }
+
+    for (var i = 0; i < cellNumberY * cellNumberX; i++) {
+        if (cells[i] == 1) {
+            var y = Math.floor(i / cellNumberX);
+            var x = i % cellNumberX;
+
+            DrawCell(x, y);
+        }
+    }
+  }
+
+  function convertStringToCells() {
+    for (var i = 0; i < 1000; i++) {
+        if (ignorableCells == null || ignorableCells.charAt(i) == '0') {
+            cells.push(0);
+        }
+        else {
+            cells.push(1);
+        }
+    }
+  }
+
+  function DrawCell(i, j) {
+    var polPoints = new Array();
+
+    polPoints.push(new jsPoint(canvasXY.x + offsetX + Math.round(i * cellWidth), canvasXY.y + offsetY + Math.round(j * cellHeight)));
+    polPoints.push(new jsPoint(canvasXY.x + offsetX + Math.round(i * cellWidth + cellWidth), canvasXY.y + offsetY + Math.round(j * cellHeight)));
+    polPoints.push(new jsPoint(canvasXY.x + offsetX + Math.round(i * cellWidth + cellWidth), canvasXY.y + offsetY + Math.round(j * cellHeight + cellHeight)));
+    polPoints.push(new jsPoint(canvasXY.x + offsetX + Math.round(i * cellWidth), canvasXY.y + offsetY + Math.round(j * cellHeight + cellHeight)));
+
+    gr.fillPolygon(col, polPoints);
+  }
+
+  function setCharAt(str, index, chr) {
+    if (index > str.length - 1)
+        return str;
+    return str.substr(0, index) + chr + str.substr(index + 1);
+  }
+
+  function fillCell() {
+	  calculateOffsets();
+    if (mouseX <= offsetX || mouseX >= imageWidth * X_offset2 || mouseY <= offsetY || mouseY >= imageHeight * Y_offset2)
+        return;
+
+    gr.clear();
+    //gr.drawImage(cameraImage.src, canvasXY, imageWidth, imageHeight);
+
+    var i = Math.floor((mouseX - offsetX) / cellWidth);
+    var j = Math.floor((mouseY - offsetY) / cellHeight);
+
+    cells[j * cellNumberX + i] = (cells[j * cellNumberX + i] + 1) % 2;
+
+    drawGrid();
+
+    ignorableCells = setCharAt(ignorableCells, j * cellNumberX + i, cells[j * cellNumberX + i]);
+    ignorableCellsElem.value = ignorableCells;
+  }
+
+
+   function upButtonClick()
+   {
+	   var yOffsetEl1 = document.getElementById("id_y_offset1");
+ 	   var yoffset1 = parseFloat(yOffsetEl1.value);
+ 	  
+ 	   var yOffsetEl2 = document.getElementById("id_y_offset2");
+       var yoffset2 = parseFloat(yOffsetEl2.value);
+
+       if (yoffset1 > 0)
+       {
+    	   yoffset1 = Math.round((yoffset1 - 0.05) * 100) / 100;
+    	   yoffset2 = Math.round((yoffset2 - 0.05) * 100) / 100;
+
+	   	   yOffsetEl1.value = yoffset1;
+	   	   yOffsetEl2.value = yoffset2;
+
+           gr.clear();
+	   	   calculateOffsets();
+	   	   drawGrid();
+       } 
+	   
+   }
+
+   function downButtonClick()
+   {
+	   var yOffsetEl1 = document.getElementById("id_y_offset1");
+ 	   var yoffset1 = parseFloat(yOffsetEl1.value);
+ 	  
+ 	   var yOffsetEl2 = document.getElementById("id_y_offset2");
+       var yoffset2 = parseFloat(yOffsetEl2.value);
+
+       if (yoffset2 < 1)
+       {
+    	   yoffset1 = Math.round((yoffset1 + 0.05) * 100) / 100;
+    	   yoffset2 = Math.round((yoffset2 + 0.05) * 100) / 100;
+
+	   	   yOffsetEl1.value = yoffset1;
+	   	   yOffsetEl2.value = yoffset2;
+
+           gr.clear();
+	   	   calculateOffsets();
+	   	   drawGrid();
+       }   
+   }
+
+
+
+   $(document).ready(function () 
+   {
+	   changeCountArrow();
+	   
+	    var image = document.getElementById('channelImage');
+	 	image.src = 'http://' + location.host + '/mjpg/video.cgi?1'; //was 8888
+
+		var upButton = document.getElementById('upButton');
+		upButton.onclick = upButtonClick;
+
+		var v = document.getElementById('downButton');
+		downButton.onclick = downButtonClick;
+
+		calculateOffsets();
+        drawGrid();
+        
+    });
+    
+</script>
+
+{% endblock %}

@@ -1,0 +1,446 @@
+@CHARSET "UTF-8";
+
+
+input [type="checkbox"]
+{
+	width: 13px;
+	height: 13px;
+}
+
+/*Hostname form*/
+div#hostNamePanel
+{
+	position: absolute;
+	left: 10px;
+	top: 51px;
+	width: 283px;
+	height: 118px;
+	border: 1px solid black;
+}
+
+#hostNameLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#id_hostname
+{
+	position: absolute;
+	left: 10px;
+	top: 34px;
+	width: 246px;
+	height: 18px;
+	text-align: right;
+}
+
+#hostnamebutton
+{
+	position: absolute;
+	left: 188px;
+	top: 78px;
+}
+
+/*Date time form*/
+div#datetimePanel
+{
+	position: absolute;
+	left: 10px;
+	top: 177px;
+	width: 283px;
+	height: 124px;
+	border: 1px solid black;
+}
+
+#datetimeLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#id_datetimefield
+{
+	position: absolute;
+	left: 102px;
+	top: 37px;
+	width: 157px;
+	height: 18px;
+	text-align: right;
+}
+
+#datetimebutton
+{
+	position: absolute;
+	left: 188px;
+	top: 84px;
+}
+
+/*Send Logs form*/
+div#logsPanel
+{
+	position: absolute;
+	left: 10px;
+	top: 317px;
+	width: 283px;
+	height: 139px;
+	border: 1px solid black;
+}
+
+#logsLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#id_emailto
+{
+	position: absolute;
+	left: 10px;
+	top: 48px;
+	width: 250px;
+	height: 18px;
+	text-align: right;
+}
+
+#logsbutton
+{
+	position: absolute;
+	left: 190px;
+	top: 99px;
+}
+
+/*Resend data form*/
+div#resenddataPanel
+{
+	position: absolute;
+	left: 10px;
+	top: 464px;
+	width: 283px;
+	height: 174px;
+	border: 1px solid black;
+}
+
+#resenddataLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#allRadioLabel
+{
+	position: absolute;
+	left: 30px;
+	top: 45px;
+}
+
+#chooseDateRadioLabel
+{
+	position: absolute;
+	left: 134px;
+	top: 45px;
+}
+
+#id_resendtype_0
+{
+	position: absolute;
+	left: 10px;
+	top: 45px;
+}
+
+#id_resendtype_1
+{
+	position: absolute;
+	left: 114px;
+	top: 45px;
+}
+
+
+#id_resenddate
+{
+	position: absolute;
+	left: 104px;
+	top: 85px;
+	width: 163px;
+	height: 18px;
+	text-align: right;
+}
+
+#resenddatabutton
+{
+	position: absolute;
+	left: 188px;
+	top: 134px;
+}
+
+/* Notifications form */
+div#notificationsPanel
+{
+	position: absolute;
+	left: 308px;
+	top: 466px;
+	width: 549px;
+	height: 174px;
+	border: 1px solid black;
+}
+
+#notificationsLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#notifyLabel
+{
+	position: absolute;
+	left: 50px;
+	top: 53px;
+}
+
+#id_notify
+{
+	position: absolute;
+	left: 28px;
+	top: 53px;
+}
+
+#notifyEmailLabel
+{
+	position: absolute;
+	left: 28px;
+	top: 104px;
+	width: 132px;
+	height: 18px;
+	text-align: right;
+}
+
+#id_notificationemail
+{
+	position: absolute;
+	left: 177px;
+	top: 93px;
+	width: 274px;
+	height: 18px;
+}
+
+#notificationsbutton
+{
+	position: absolute;
+	left: 451px;
+	top: 134px;
+}
+
+/* Network configuration form */
+div#networkPanel
+{
+	position: absolute;
+	left: 308px;
+	top: 51px;
+	width: 549px;
+	height: 405px;
+	border: 1px solid black;
+}
+
+#networkLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+div#networkTypeAbsolutePanel
+{
+	position: absolute;
+	left: 10px;
+	top: 36px;
+	width: 220px;
+	height: 312px;
+	border: 1px solid black;
+}
+
+#networkTypeLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#id_networktype_0
+{
+	position: absolute;
+	left: 20px;
+	top: 44px;
+}
+
+#id_networktype_1
+{
+	position: absolute;
+	left: 137px;
+	top: 44px;
+}
+
+#ethernetTypeLabel
+{
+	position: absolute;
+	left: 40px;
+	top: 44px;
+}
+
+#wifiTypeLabel
+{
+	position: absolute;
+	left: 157px;
+	top: 44px;
+}
+
+#wifiessidLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 82px;
+}
+
+#id_wifiessid
+{
+	position: absolute;
+	left: 14px;
+	top: 109px;
+	width: 184px;
+	height: 20px;
+}
+
+#wifiPasswordLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 151px;
+}
+
+#id_wifipassword
+{
+	position: absolute;
+	left: 14px;
+	top: 175px;
+	width: 174px;
+	height: 16px;
+}
+
+#networkbutton
+{
+	position: absolute;
+	left: 452px;
+	top: 365px;
+}
+
+div#ipConfigPanel
+{
+	position: absolute;
+	left: 238px;
+	top: 36px;
+	width: 297px;
+	height: 312px;
+	border: 1px solid black;
+}
+
+#ipCounfigurationLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#id_iptype_0
+{
+	position: absolute;
+	left: 10px;
+	top: 37px;
+}
+
+#id_iptype_1
+{
+	position: absolute;
+	left: 152px;
+	top: 37px;
+}
+
+#ipDynamicLabel
+{
+	position: absolute;
+	left: 30px;
+	top: 37px;
+}
+
+#ipStaticLabel
+{
+	position: absolute;
+	left: 172px;
+	top: 37px;
+}
+
+#ipAddressLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 92px;
+}
+
+#id_ipaddress
+{
+	position: absolute;
+	left: 118px;
+	top: 80px;
+	width: 159px;
+	height: 18px;
+}
+
+#ipMaskLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 137px;
+}
+
+#id_ipmask
+{
+	position: absolute;
+	left: 118px;
+	top: 125px;
+	width: 159px;
+	height: 18px;
+}
+
+#gatewayLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 183px;
+}
+
+#id_gateway
+{
+	position: absolute;
+	left: 118px;
+	top: 171px;
+	width: 159px;
+	height: 18px;
+}
+
+#dnsServerLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 230px;
+}
+
+#id_dnsserver
+{
+	position: absolute;
+	left: 118px;
+	top: 218px;
+	width: 159px;
+	height: 18px;
+}

@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+
+#updatePackageLabel
+{
+	position: absolute;
+	left: 20px;
+	top: 45px;
+}
+
+#id_filename
+{
+	position: absolute;
+	left: 200px;
+	top:45px;
+	display: none
+}
+
+#id_filenametext
+{
+	position: absolute;
+	left: 35px;
+	top:75px;
+    height: 13px;
+	width : 200px;
+}
+
+#id_fakeBrowse
+{
+	position: absolute;
+	left: 247px;
+	top:73px;
+	height: 30px;
+}
+	
+#applybutton
+{
+	position: absolute;
+	left: 35px;
+	top: 157px;
+}
+
+#progress 
+{ 
+	position:absolute;
+	width:400px; 
+	border: 1px solid #ddd; 
+	padding: 1px; 
+	border-radius: 3px;
+	left: 35px;
+	top: 110px;
+}
+
+#bar 
+{ 
+	background-color: #B4F5B4; 
+	width:0%; height:20px; 
+	border-radius: 3px; 
+}
+
+#percent 
+{ 
+	position:absolute; 
+	display:inline-block; 
+	top:3px; 
+	left:48%; 
+}
+
+#message
+{
+	position: absolute;
+	left: 35px;
+	top: 135px;
+}

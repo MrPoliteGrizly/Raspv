@@ -1,0 +1,534 @@
+@CHARSET "UTF-8";
+
+
+
+input [type="checkbox"]
+{
+	width: 13px;
+	height: 13px;
+}
+
+div#shoppanel
+{
+	position: absolute;
+	left: 10px;
+	top: 55px;
+	width: 313px;
+	height: 191px;
+	border: 1px solid black;
+}
+
+#shoppanellabel
+{
+	height: 18px;
+	left: 10px;
+	position: absolute;
+	top: -2px;
+	width: 50px;
+}
+
+#shopidlabel
+{
+	height: 38px;
+	left: 6px;
+	position: absolute;
+	text-align: right;
+	top: 22px;
+	width: 98px;
+}
+
+#id_shopid
+{
+	height: 18px;
+	left: 109px;
+	position: absolute;
+	top: 22px; 
+	width: 184px;
+}
+
+#schedulelabel
+{
+	height: 18px;
+	left: 10px;
+	position: absolute;
+	top: 80px;
+	width: 301px;
+}
+
+#id_workallday
+{	
+	position: absolute;
+	top: 124px;
+	left: 4px;
+}
+
+#alldaylabel
+{
+	left: 31px;
+	position: absolute;
+	top: 125px;
+}
+
+#countfromlabel
+{
+	left: 117px;
+	position: absolute;
+	top: 125px;
+	width: 42px;
+	text-align: right;
+	height: 13px;
+}
+
+#id_worktimefrom
+{
+	left: 165px;
+	position: absolute;
+	top: 115px;
+	width: 36px;
+	height: 16px;
+	text-align: right;
+}
+
+#counttilllabel
+{
+	left: 231px;
+	position: absolute;
+	top: 125px;
+	text-align: right;
+}
+
+#id_worktimetill
+{
+	left: 253px;
+	position: absolute;
+	top: 115px;
+	width: 36px;
+	height: 16px;
+	text-align: right;
+}
+
+/* Reports Settings */
+div#reportsettings
+{
+	position: absolute;
+	left: 10px;
+	top: 254px;
+	width: 313px;
+	height: 206px;
+	border: 1px solid black;
+}
+
+#reportsendinglabel
+{
+	position: absolute;
+	left: 10px;
+	top: 0px;
+}
+
+#reportRangeLabel
+{
+	position: absolute;
+	left: 20px;
+	top: 34px;
+}
+
+#id_intervalhours
+{
+	left: 244px;
+	position: absolute;
+	top: 31px;
+	width: 36px;
+	height: 16px;
+	text-align: right;
+}
+
+#manualHoursLabel
+{
+	position: absolute;
+	left: 36px;
+	top: 65px;
+	width: 218px;
+	height: 36px;
+}
+
+#id_ismanualhours
+{
+	position: absolute;
+	top: 71px;
+	left: 10px;
+}
+
+#id_manualhours
+{
+	position: absolute;
+	left: 10px;
+	top: 107px;
+	width: 283px;
+	height: 18px;
+}
+
+#is1Clabel
+{
+	position: absolute;
+	left: 36px;
+	top: 161px;
+}
+
+#id_is1C
+{
+	position: absolute;
+	left: 10px;
+	top: 161px;
+}
+
+/* Delivery types */
+
+div#reportdelivery
+{
+	position: absolute;
+	left: 10px;
+	top: 468px;
+	width: 663px;
+	height: 193px;
+	border: 1px solid black;
+}
+
+#deliveryTypesLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#id_sendbyemail
+{
+	position: absolute;
+	left: 10px;
+	top: 35px;
+}
+
+#sendByEmailLabel
+{
+	position: absolute;
+	left: 36px;
+	top: 36px;
+}
+
+#toEmailLabel
+{
+	position: absolute;
+	left: 7px;
+	top: 82px;
+}
+
+#id_emailto
+{
+	position: absolute;
+	left: 44px;
+	top: 70px;
+	width: 227px;
+	height: 18px;
+}
+
+#sendToServerLabel
+{
+	position: absolute;
+	left: 36px;
+	top: 126px;
+}
+
+#id_sendtoserver
+{
+	position: absolute;
+	left: 10px;
+	top: 125px;
+}
+
+#serverAddressLabel
+{
+	position: absolute;
+	left: 0px;
+	top: 165px;
+	width: 52px;
+	height: 18px;
+	text-align: right;
+}
+
+#id_serveraddress
+{
+	position: absolute;
+	left: 58px;
+	top: 150px;
+	width: 150px;
+	height: 18px;
+}
+
+#serverPortLabel
+{
+	position: absolute;
+	left: 235px;
+	top: 165px;
+	width: 36px;
+	height: 18px;
+	text-align: right;
+}
+
+#id_serverport
+{
+	position: absolute;
+	left: 277px;
+	top: 150px;
+	width: 37px;
+	height: 18px;
+}
+
+div#shareSettings
+{
+	position: absolute;
+	left: 353px;
+	top: 10px;
+	width: 298px;
+	height: 171px;
+	border: 1px solid black;
+}
+
+#sharedFolderLabel
+{
+	position: absolute;
+	left: 36px;
+	top: 10px;
+}
+
+#id_useshared
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#sharePathLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 46px;
+	width: 37px;
+	height: 18px;
+	text-align: right;
+}
+
+#id_sharepath
+{
+	position: absolute;
+	left: 53px;
+	top: 34px;
+	width: 225px;
+	height: 18px;
+}
+
+#shareUserLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 91px;
+	width: 90px;
+	height: 18px;
+	text-align: right;
+}
+
+#id_shareuser
+{
+	position: absolute;
+	left: 106px;
+	top: 81px;
+	width: 172px;
+	height: 18px;
+}
+
+#sharePasswordLabel
+{
+	position: absolute;
+	left: 24px;
+	top: 139px;
+	width: 76px;
+	height: 18px;
+	text-align: right;
+}
+
+#id_sharepassword
+{
+	position: absolute;
+	left: 106px;
+	top: 129px;
+	width: 172px;
+	height: 18px;
+}
+
+
+/* Email Settings */
+div#emailSettings
+{
+	position: absolute;
+	left: 338px;
+	top: 55px;
+	width: 335px;
+	height: 405px;
+	border: 1px solid black;
+}
+
+#outgoingEmailLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 0px;
+}
+
+#emailFromLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 28px;
+}
+
+#id_emailfrom
+{
+	position: absolute;
+	left: 101px;
+	top: 24px;
+	width: 213px;
+	height: 18px;
+}
+
+#smtpServerLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 64px;
+}
+
+#id_smtpserver
+{
+	position: absolute;
+	left: 101px;
+	top: 60px;
+	width: 213px;
+	height: 18px;
+}
+
+#smtpPortLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 100px;
+}
+
+#id_smtpport
+{
+	position: absolute;
+	left: 101px;
+	top: 96px;
+	width: 213px;
+	height: 18px;
+}
+
+#attemptsToSendLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 146px;
+}
+
+#id_attemptstosend
+{
+	position: absolute;
+	left: 253px;
+	top: 142px;
+	width: 62px;
+	height: 18px;
+}
+
+/* SMTP Authentication Panel */
+div#smtpAuth
+{
+	position: absolute;
+	left: 8px;
+	top: 196px;
+	width: 314px;
+	height: 197px;
+	border: 1px solid black;
+}
+
+#authenticationLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 0px;
+}
+
+#isAuthenticateLabel
+{
+	position: absolute;
+	left: 37px;
+	top: 28px;
+}
+
+#emailUserNameLabel
+{
+	position: absolute;
+	left: 67px;
+	top: 25px;
+}
+
+#id_useauthentication
+{
+	position: absolute;
+	left: 10px;
+	top:27px;	
+}
+
+#emailUserNameLabel
+{
+	position: absolute;
+	left: 10px;
+	top: 78px;
+	width: 67px;
+	height: 25px;
+}
+
+#id_smtpuser
+{
+	position: absolute;
+	left: 83px;
+	top: 73px;
+	width: 207px;
+	height: 18px;
+}
+
+#emailPasswordLabel
+{
+	position: absolute;
+	left: 10px;
+	top:113px;	
+}
+
+#id_smtppassword
+{
+	position: absolute;
+	left: 83px;
+	top: 109px;
+	width: 207px;
+	height: 18px;
+}
+
+#useSslLabel
+{
+	position: absolute;
+	left: 37px;
+	top: 160px;
+}
+
+#id_usessl
+{
+	position: absolute;
+	left: 10px;
+	top: 160px;
+}

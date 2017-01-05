@@ -1,0 +1,10 @@
+<NetworkConfiguration>
+  <NetworkType>0</NetworkType>
+ <WifiESSIDName />
+  <WifiPassword />
+  <IpConfigType>0</IpConfigType>
+  <IpAddress>192.168.0.1</IpAddress>
+  <Mask>255.255.255.0</Mask>
+  <Gateway>192.168.0.3</Gateway>
+  <DnsServer />
+</NetworkConfiguration>

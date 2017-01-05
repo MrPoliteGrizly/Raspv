@@ -1,0 +1,35 @@
+# Create your views here.
+
+from settings.models import *
+from settings.forms import SettingsForm
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from vCountDjGui.auxilary import isLoggedIn, closeSession, getPageDictionary, getLanguageByRequest, getErrorList
+
+
+
+def index(request):
+    if not isLoggedIn(request):
+        return redirect('/login/')
+    
+    settings = ServiceSettings()
+    
+    dictum = getPageDictionary(request, 'settingsForm') 
+    
+    if request.method == 'POST':
+        lang = getLanguageByRequest(request)
+        form = SettingsForm(language=lang, data=request.POST)
+        if form.is_valid():
+            result, reason = setSettingsToXML(form, settings)
+            if result:
+                return HttpResponse(dictum['settingsSavedMessage'])
+            else:
+                return HttpResponse('Server error!' + reason)
+        else:
+            return HttpResponse('%s\n %s' % (dictum['formErrors'], getErrorList('%s' % form.errors)))
+    
+    initialVals = setSettingsToView(settings)
+    form = SettingsForm(initial=initialVals)
+    
+    return render(request, 'settings/settings_form.html', {'form': form, 'dictum': dictum})
+

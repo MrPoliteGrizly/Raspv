@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/vCountArm/!svn/ver/30/src/vCountDjGui/vCountDjGui/settings
+END
+settingsparser.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/settings/settingsparser.py
+END
+views.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/vCountArm/!svn/ver/21/src/vCountDjGui/vCountDjGui/settings/views.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/settings/__init__.py
+END
+tests.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/settings/tests.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/vCountArm/!svn/ver/30/src/vCountDjGui/vCountDjGui/settings/models.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/settings/urls.py
+END
+forms.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/vCountArm/!svn/ver/30/src/vCountDjGui/vCountDjGui/settings/forms.py
+END

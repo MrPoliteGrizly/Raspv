@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="ru">
+<head>
+<title>
+    {% block title %}
+    {% endblock %}
+</title>
+<link href="/content/css/site_base.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="icon" 
+      type="image/icon" 
+      href="/content/images/favicon.ico">
+</head>
+<body>
+
+<script type="text/javascript" src="/content/javascript/jquery/jquery-1.10.1.min.js"></script>
+<style>
+        .alert .alert-shadow {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            background: #000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+        .alert .alert-dialog {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            width: 300px;
+            margin-left: -150px;
+            padding: 10px 0;
+            background: #fff;
+            border: 1px solid #000;
+        }
+        .alert .alert-text {
+            padding: 10px;
+        }
+        .alert .alert-controls {
+            text-align: center;
+        }
+    </style>
+    <script>
+        function Alert(text) {
+            this._create(text);
+        }
+        Alert.prototype = {
+            constructor: Alert,
+            html: [
+                '<div class="alert">',
+                    '<div class="alert-shadow"></div>',
+                    '<div class="alert-dialog">',
+                        '<div class="alert-text">',
+                            '{TEXT}',
+                        '</div>',
+                        '<div class="alert-controls">',
+                            '<button id="alertButton" type="button">OK</button>',
+                        '</div>',
+                    '</div>',
+                '</div>'
+            ].join(""),
+            _rootElement: null,
+            _create: function (text) {
+                var node = document.createElement("div");
+                node.innerHTML = this.html.replace("{TEXT}", text);
+                this._rootElement = node.firstChild;
+                this._addEvents();
+            },
+            _addEvents: function () {
+                var thisAlert = this;
+                this._rootElement.getElementsByTagName("button")[0].onclick = function () {
+                    thisAlert.close();
+                };
+            },
+            show: function () {
+                document.body.appendChild(this._rootElement);
+                document.getElementById('alertButton').focus();
+            },
+            close: function () {
+                document.body.removeChild(this._rootElement);
+            }
+        };
+    </script>
+    
+
+
+
+{% block menu %}
+{% endblock %}
+
+<form id="languageChange" action="" method="post">{% csrf_token %}
+    <select id="language" name="language">
+        <option value="rus">rus</option>
+        <option value="eng">eng</option>
+    </select>
+</form>
+
+
+{% block content %}
+{% endblock %}
+
+
+<script type="text/javascript">
+    var langForm = $('#languageChange');
+    langForm.submit(function () {
+        var dataToSend = langForm.serialize();
+        dataToSend = dataToSend + '&next=' + location.pathname;
+        
+        
+        $.ajax({
+            type: "POST",
+            url: "/changelanguage/",
+            data: dataToSend,
+            success: function (data) {
+        		location.reload();
+            },
+            error: function(data) {
+            	
+            }
+        });
+        return false;
+    });
+
+    function getCookie(c_name)
+    {
+    	var c_value = document.cookie;
+    	var c_start = c_value.indexOf(" " + c_name + "=");
+    	if (c_start == -1)
+      	{
+      		c_start = c_value.indexOf(c_name + "=");
+      	}
+    	if (c_start == -1)
+      	{
+      		c_value = null;
+      	}
+    	else
+      	{
+      		c_start = c_value.indexOf("=", c_start) + 1;
+      		var c_end = c_value.indexOf(";", c_start);
+      		if (c_end == -1)
+      		{
+    			c_end = c_value.length;
+    		}
+    		c_value = unescape(c_value.substring(c_start,c_end));
+    	}
+    	return c_value;
+
+    }
+
+    $(document).ready(function () 
+    {
+        var languageCombo = document.getElementById('language');
+        languageCombo.onchange = function(){
+        	var langform = $('#languageChange');
+        	langform.submit();
+        };
+
+        var lang = getCookie('language');
+        if (lang == 'rus')
+        {
+        	languageCombo.value = 'rus'
+        }
+        else if (lang == 'eng')
+        {
+        	languageCombo.value = 'eng'
+        }
+
+        
+        setTimeout("location.reload(true);", 1800000);
+    });
+</script>
+
+</body>
+
+</html>

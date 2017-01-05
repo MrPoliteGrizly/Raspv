@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/vCountArm/!svn/ver/30/src/vCountDjGui/vCountDjGui/vCountDjGui
+END
+wsgi.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/vCountDjGui/wsgi.py
+END
+vcount.db
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/vCountDjGui/vcount.db
+END
+middleware.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/vCountDjGui/middleware.py
+END
+auxilary.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/vCountArm/!svn/ver/21/src/vCountDjGui/vCountDjGui/vCountDjGui/auxilary.py
+END
+languageprovider.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/vCountArm/!svn/ver/30/src/vCountDjGui/vCountDjGui/vCountDjGui/languageprovider.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/vCountDjGui/__init__.py
+END
+settings.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/vCountArm/!svn/ver/8/src/vCountDjGui/vCountDjGui/vCountDjGui/settings.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/vCountArm/!svn/ver/21/src/vCountDjGui/vCountDjGui/vCountDjGui/urls.py
+END
