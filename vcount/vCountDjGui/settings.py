@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'settings',
     'channels',
+    'stastic',
 )
 
 # A sample logging configuration. The only tangible logging
