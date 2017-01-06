@@ -82,6 +82,11 @@ Dictionary = {
                           'sendbutton' : ['Применить', 'Apply'],
                           'settingsSavedMessage' : ['Настройки успешно сохранены!', 'Settings successfully saved!'],
                           },
+              'stasticForm' : {
+                          'title' : ['Cтатистика', 'Statistics'],
+
+
+              },
               'administrationForm' : {
                           'title' : ['Администрирование', 'Administration'],
                           'hostNameLabel' : ['Имя компьютера в сети', 'Host name'],
@@ -152,6 +157,7 @@ TabDictionary = {
         'updateTab' : ['Обновление', 'Update'],
         'passwordTab' : ['Пароль', 'Password'],
         'exitTab' : ['Выход', 'Exit'],
+        'stasticTab' : ['Cтатистика', 'Statistics'],
                 }
 
 CommonDictioanry = {

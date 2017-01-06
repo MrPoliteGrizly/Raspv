@@ -12,7 +12,7 @@ def index(request):
         return redirect('/login/')'''
     
     settings = ServiceSettings()
-    dictum = getPageDictionary(request, 'channelsForm') 
+    dictum = getPageDictionary(request, 'stasticForm') 
     
     if request.method == 'POST':
         form = ChannelsForm(request.POST)
