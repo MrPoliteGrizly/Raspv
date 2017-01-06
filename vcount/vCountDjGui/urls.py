@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     (r'^exit/$', auxilary.closeSession),
     (r'^hardwareid/$', auxilary.get_hwid),
     (r'^login/$', include('login.urls')), 
+    (r'^stastic/$', include('stastic.urls')), 
     #TemplateView.as_view(template= 'settings/settings_detail.html')
     #url(r'^settings/$', 'settings.views.SettingsView', TemplateView.as_view(template_name= 'settings/settings_detail.html')),
 )

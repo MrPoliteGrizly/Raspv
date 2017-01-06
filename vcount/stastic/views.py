@@ -27,4 +27,4 @@ def index(request):
     initialVals = setSettingsToView(settings)
     form = ChannelsForm(initial=initialVals)
     
-    return render(request, 'channels/channels_form.html', {'form': form, 'dictum': dictum})
+    return render(request, 'stastic/stastic_form.html', {'form': form, 'dictum': dictum})
