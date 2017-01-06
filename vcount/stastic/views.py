@@ -5,6 +5,7 @@ from channels.forms import ChannelsForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from vCountDjGui.auxilary import isLoggedIn, closeSession, getPageDictionary
+from chartit import DataPool, Chart
 
 def index(request):
     '''if not isLoggedIn(request):
@@ -28,3 +29,5 @@ def index(request):
     form = ChannelsForm(initial=initialVals)
     
     return render(request, 'stastic/stastic_form.html', {'form': form, 'dictum': dictum})
+
+
