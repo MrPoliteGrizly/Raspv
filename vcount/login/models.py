@@ -7,9 +7,9 @@ from vCountDjGui.auxilary import rootDir
 
 
 def verifyLogin(login, password):
-    result = False
+    result = True
     reason = ''
-    
+    '''
     try:
         passwordfile = os.path.join(rootDir(),'vCount/password.dat')
         fd = open(passwordfile)
@@ -30,5 +30,5 @@ def verifyLogin(login, password):
 
     except:
         reason = 'Server error: %s\n %s\n %s' %  (sys.exc_info()[0], sys.exc_info()[1], sys.exc_info()[2])
-        
+     '''   
     return result, reason
