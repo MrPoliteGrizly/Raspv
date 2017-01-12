@@ -84,6 +84,8 @@ Dictionary = {
                           },
               'stasticForm' : {
                           'title' : ['Cтатистика', 'Statistics'],
+                          'input' : ['Bход','Input'],
+                          'output' : ['Bыход','Output'],
 
 
               },

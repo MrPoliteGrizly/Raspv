@@ -13,8 +13,8 @@ from django.db.models import Count, Sum
 
 
 def index(request):
-    '''if not isLoggedIn(request):
-        return redirect('/login/')'''
+    if not isLoggedIn(request):
+        return redirect('/login/')
     
     settings = ServiceSettings()
     dictum = getPageDictionary(request, 'stasticForm') 
@@ -34,7 +34,7 @@ def index(request):
     form = ChannelsForm(initial=initialVals)
 
     start_date = date.today()
-    end_date = date(2017, 1, 20)
+    end_date = date(2017, 2, 20)
 
     queryset = Payment.objects.all()
     # считаем количество платежей...
