@@ -40,8 +40,8 @@ def index(request):
     # считаем количество платежей...
     qsstats = QuerySetStats(queryset, date_field='datetime', aggregate=Count('id'))
     # ...в день за указанный период
-    values = qsstats.time_series(start_date, end_date, interval='days')
+    inpu = qsstats.time_series(start_date, end_date, interval='days')
     # 2nd graph
-    summary = qsstats.time_series(start_date, end_date, interval='days', aggregate=Sum('amount'))
+    outpu = qsstats.time_series(start_date, end_date, interval='days')
 
-    return render(request, 'stastic/stastic_form.html', {'form': form, 'dictum': dictum, 'values': values, 'summary': summary,})
+    return render(request, 'stastic/stastic_form.html', {'form': form, 'dictum': dictum, 'values': inpu, 'summary': outpu,})
